@@ -14,5 +14,6 @@ namespace ProductsWebAPI
     {
         IRepository<Product> Products { get; }
         public void Complete();
+        public Task CompleteAsync();
     }
 }

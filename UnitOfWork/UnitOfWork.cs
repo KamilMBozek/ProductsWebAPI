@@ -12,7 +12,7 @@ namespace ProductsWebAPI
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly APIDbContext context;
+        private APIDbContext context;
         private IRepository<Product> productRepository;
 
         public IRepository<Product> Products
@@ -31,6 +31,11 @@ namespace ProductsWebAPI
         public void Complete()
         {
             this.context.SaveChanges();
+        }
+
+        public async Task CompleteAsync()
+        {
+           await this.context.SaveChangesAsync();
         }
 
         public void Dispose()

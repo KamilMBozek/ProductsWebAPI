@@ -21,19 +21,14 @@ namespace ProductsWebAPI
             this.dataContext = context;
         }
 
-        public TEntity Get(Guid? id)
+        public async Task<TEntity> Get(Guid? id)
         {
-            return dataContext.Set<TEntity>().Find(id);
+            return await dataContext.Set<TEntity>().FindAsync(id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public async Task<IEnumerable<TEntity>> GetAll()
         {
-            return dataContext.Set<TEntity>().ToList();
-        }
-
-        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
-        {
-            return dataContext.Set<TEntity>().Where(predicate);
+            return await dataContext.Set<TEntity>().ToListAsync();
         }
 
         public void Add(TEntity entity)
@@ -46,9 +41,9 @@ namespace ProductsWebAPI
             dataContext.Set<TEntity>().Remove(entity);
         }
 
-        public void RemoveById(Guid Id)
+        public async Task RemoveById(Guid Id)
         {
-            dataContext.Set<TEntity>().Remove(Get(Id));
+            dataContext.Set<TEntity>().Remove(await Get(Id));
         }
 
         public void Update(TEntity entity)

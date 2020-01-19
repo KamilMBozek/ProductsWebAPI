@@ -12,14 +12,13 @@ namespace ProductsWebAPI
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        TEntity Get(Guid? id);
-        IEnumerable<TEntity> GetAll();
-        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+        Task<TEntity> Get(Guid? id);
+        Task<IEnumerable<TEntity>> GetAll();
 
         void Add(TEntity entity);
         
         void Remove(TEntity entity);
-        void RemoveById(Guid Id);
+        Task RemoveById(Guid Id);
         
         public void Update(TEntity entity);
 
